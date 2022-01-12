@@ -16,7 +16,7 @@ export class ErrorHandlingService {
 
   handleError(data: any, redirectAnyway: boolean = false): Observable<any> {
     if (data?.error?.status === 401 || redirectAnyway) {
-      self.location.href = `${appConfig.FRONTEND_URL}${appRoutes.login}`;
+      this.redirectLogin();
       return throwError(data);
     } else {
       const ref = this.dialog.open(ErrorHandlingComponent, {
@@ -25,5 +25,9 @@ export class ErrorHandlingService {
       });
       return ref.afterClosed();
     }
+  }
+
+  redirectLogin() {
+    self.location.href = `${appConfig.FRONTEND_URL}${appRoutes.login}`;
   }
 }

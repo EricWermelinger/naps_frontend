@@ -3,46 +3,39 @@ import { Router } from '@angular/router';
 import { NapsApiService } from '../api/naps-api.service';
 import { appRoutes } from '../config/appRoutes';
 import { endpoints } from '../config/endpoints';
+import { LocalStorageAccessService } from './local-storage-access.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  TOKEN: string = 'naps_token';
-
   constructor(
     private api: NapsApiService,
+    private localStorage: LocalStorageAccessService,
     private router: Router,
   ) { }
-
-  buildToken(token: string, refresh: string): string {
-    return `${token} ${refresh}`;
-  }
 
   loginUser(email: string, password: string): void {
     this.api.post(endpoints.login, {
       email,
       password
     }).subscribe(token => {
-      localStorage.setItem(this.TOKEN, token);
+      this.localStorage.setToken(token);
       this.router.navigate([appRoutes.app, appRoutes.initialAfterLogin]);
     });
   }
 
   logoutUser(): void {
-    this.api.delete(endpoints.login, {}).subscribe(_ => {
-      localStorage.removeItem(this.TOKEN);
+    const refresh = this.localStorage.getRefresh();
+    this.api.delete(endpoints.login, {
+      refresh
+    }).subscribe(_ => {
+      this.localStorage.removeToken();
     });
   }
 
-  getToken(): string | undefined {
-    const token = localStorage.getItem(this.TOKEN);
-    return !!token ? token.split(' ')[0] : undefined;
-  }
-
-  getRefresh(): string | undefined {
-    const token = localStorage.getItem(this.TOKEN);
-    return !!token ? token.split(' ')[1] : undefined;
+  isLoggedIn(): boolean {
+    return !!this.localStorage.getToken();
   }
 }
