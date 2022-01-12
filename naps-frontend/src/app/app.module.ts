@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { LoginSuccessComponent } from './pages/login-success/login-success.component';
 import { LoginComponent } from './pages/login/login.component';
+import { ErrorHandlingComponent } from './api/error-handling/error-handling.component';
 
 
 @NgModule({
@@ -14,6 +16,7 @@ import { LoginComponent } from './pages/login/login.component';
     AppComponent,
     LoginComponent,
     LoginSuccessComponent,
+    ErrorHandlingComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import { LoginComponent } from './pages/login/login.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
