@@ -38,6 +38,6 @@ export class LocalStorageAccessService {
   checkTokenExpired(): boolean {
     const expired = this.getExpired();
     const now = Date.now();
-    return !expired || parseInt(expired) < now;
+    return !!expired && parseInt(expired) < now;
   }
 }
