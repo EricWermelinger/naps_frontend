@@ -1,0 +1,41 @@
+<div *ngIf="form$ | async as form" [formGroup]="form" class="form">
+    <h1>{{ formGroupConfiguration?.caption }}</h1>
+    <ng-container *ngFor="let ctrl of fields" [ngSwitch]="ctrl.type">
+        <mat-form-field *ngSwitchCase="'password'">
+            <input matInput type="password" [formControlName]="ctrl.name" [placeholder]="ctrl.caption">
+        </mat-form-field>
+        <mat-form-field *ngSwitchCase="'input'">
+            <input matInput type="input" [formControlName]="ctrl.name" [placeholder]="ctrl.caption">
+        </mat-form-field>
+        <ng-container *ngSwitchCase="'checkbox'">
+            <mat-checkbox [checked]="true" matInput [formControlName]="ctrl.name">{{ctrl.caption}}</mat-checkbox>
+        </ng-container>
+        <mat-form-field *ngSwitchCase="'textarea'">
+            <textarea matInput [formControlName]="ctrl.name" [maxlength]="ctrl.configuration.maxlength" [placeholder]="ctrl.caption"></textarea>
+        </mat-form-field>
+        <mat-radio-group *ngSwitchCase="'radiobutton'" class="radiobutton-field">
+            <mat-label>{{ctrl.caption}}</mat-label>
+            <mat-radio-button *ngFor="let option of ctrl.configuration.values" [value]="option.key">{{option.value}}
+            </mat-radio-button>
+        </mat-radio-group>
+        <mat-form-field *ngSwitchCase="'datepicker'">
+            <mat-label>{{ctrl.caption}}</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field *ngSwitchCase="'dropdown'">
+            <mat-label>{{ctrl.caption}}</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let option of ctrl.configuration.values" [value]="option.key">
+                    {{option.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </ng-container>
+    <div *ngFor="let label of labels" class="label-field">
+        <mat-label>{{ label.label }}</mat-label>
+        <mat-label class="label-value">{{ label.value }}</mat-label>
+    </div>
+    <button mat-flat-button color="primary" type="submit" (click)="save(form)">Save</button>
+</div>

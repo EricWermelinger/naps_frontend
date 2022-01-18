@@ -33,9 +33,9 @@ export class NapsApiService {
     return this.buildRequest(request, payload);
   }
 
- delete(endpoint: string, refreshToken: any) {
-    const request = this.http.delete<any>(`${appConfig.API_URL}${endpoint}/${refreshToken}`);
-    return this.buildRequest(request, refreshToken);
+  delete(endpoint: string, parameter: string) {
+    const request = this.http.delete<any>(`${appConfig.API_URL}${endpoint}/${parameter}`);
+    return this.buildRequest(request, parameter);
   }
 
   callNoCheck(endpoint: string, payload: any, method: 'GET' | 'POST' | 'PUT' | 'DELETE') {
