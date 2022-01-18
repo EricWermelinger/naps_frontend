@@ -1,0 +1,22 @@
+.form {
+    margin: 24px;
+    width: 600px;
+    display: grid;
+    grid-gap: 10px;
+    &>mat-form-field,
+    &>.labelField {
+        display: grid;
+    }
+}
+
+.label-field {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .label-value {
+        font-weight: bold;
+    }
+}
+
+.radiobutton-field {
+    display: grid;
+}

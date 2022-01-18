@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { LoginSuccessComponent } from './pages/login-success/login-success.component';
 import { LoginComponent } from './pages/login/login.component';
+import { FormGroupComponent } from './framework/form-group/form-group.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { LoginComponent } from './pages/login/login.component';
     LoginComponent,
     LoginSuccessComponent,
     ErrorHandlingComponent,
+    FormGroupComponent,
   ],
   imports: [
     BrowserModule,
