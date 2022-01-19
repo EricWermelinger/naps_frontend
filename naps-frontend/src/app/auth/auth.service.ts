@@ -27,7 +27,9 @@ export class AuthService {
   }
 
   logoutUser(): void {
-    const refresh = this.localStorage.getRefresh();
+    const refresh = {
+      refresh: this.localStorage.getRefresh(),
+    };
     if (refresh) {
       this.api.delete(endpoints.login, refresh).subscribe(_ => {
         this.localStorage.removeToken();
