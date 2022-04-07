@@ -21,5 +21,6 @@
             "source.organizeImports": true,
             "source.fixAll": true
         }
-    }
+    },
+    "staticWebApps.outputSubpath": "dist/angular-basic"
 }
